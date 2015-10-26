@@ -7,13 +7,16 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.jking31cs.jerseyexample.objects.TodoList;
+import com.jking31cs.jerseyexample.objects.User;
 import com.jking31cs.jerseyexample.stores.TodoListStore;
+import com.jking31cs.jerseyexample.stores.UserStore;
 
 /**
  * This web service handles all the different http calls from a client to create, read, update, and delete TodoLists.
@@ -23,10 +26,12 @@ import com.jking31cs.jerseyexample.stores.TodoListStore;
 public class TodoListWebService {
 
     private final TodoListStore store;
+	private final UserStore userStore;
 
     @Inject
-    public TodoListWebService(TodoListStore store) {
+    public TodoListWebService(TodoListStore store, UserStore userStore) {
         this.store = store;
+		this.userStore = userStore;
     }
 
     @GET
@@ -56,6 +61,7 @@ public class TodoListWebService {
     public TodoList updateList(@PathParam("id") Long id, TodoList todoList) {
         return store.save(todoList);
     }
-
+	
+	
 
 }
